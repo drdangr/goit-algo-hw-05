@@ -149,7 +149,7 @@ def load_text(path: str) -> str:
 
 def choose_existing_substring(text: str, length: int = 20) -> str:
     """
-    Беремо підрядок із середини тексту, щоб він точно існував.
+    Беремо підрядок десь із середини тексту, щоб він точно існував.
     """
     if len(text) <= length:
         return text
@@ -160,10 +160,11 @@ def choose_existing_substring(text: str, length: int = 20) -> str:
 
 def choose_fake_substring() -> str:
     """
-    Вигаданий підрядок, якого з великою ймовірністю немає в текстах.
+    Абсурд, якого немає в текстах.
     """
     return "qwerty_uiop_1234567890"
 
+# Тестуємо алгоритми на двох текстах
 if __name__ == "__main__":
     # Заміни імена файлів на ті, що дали в завданні
     article1_path = "data/article1.txt"
