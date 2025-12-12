@@ -146,6 +146,7 @@ def load_text(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
+# Вибір підрядків для тестування
 
 def choose_existing_substring(text: str, length: int = 20) -> str:
     """
@@ -157,12 +158,15 @@ def choose_existing_substring(text: str, length: int = 20) -> str:
     end = start + length
     return text[start:end]
 
+# Вибір абсурдного підрядка, якого немає в тексті
 
 def choose_fake_substring() -> str:
     """
     Абсурд, якого немає в текстах.
     """
     return "qwerty_uiop_1234567890"
+
+# Бенчмарк для одного тексту та набору алгоритмів
 
 def benchmark_for_text(
     text_name: str,
@@ -186,8 +190,9 @@ def benchmark_for_text(
     return results
 
 # Тестуємо алгоритми на двох текстах
+
 if __name__ == "__main__":
-    # Заміни імена файлів на ті, що дали в завданні
+    
     article1_path = "data/article1.txt"
     article2_path = "data/article2.txt"
 
