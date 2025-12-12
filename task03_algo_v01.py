@@ -164,6 +164,27 @@ def choose_fake_substring() -> str:
     """
     return "qwerty_uiop_1234567890"
 
+def benchmark_for_text(
+    text_name: str,
+    text: str,
+    pattern_exist: str,
+    pattern_fake: str,
+    algorithms: dict,
+    number: int = 10,
+):
+    results = []
+    ''' 
+    Виконує бенчмарк для заданого тексту та підрядків.
+    '''
+    for algo_name, algo_func in algorithms.items():
+        t_exist = measure_time(algo_func, text, pattern_exist, number=number)
+        t_fake = measure_time(algo_func, text, pattern_fake, number=number)
+
+        results.append((text_name, algo_name, "exists", t_exist))
+        results.append((text_name, algo_name, "fake", t_fake))
+
+    return results
+
 # Тестуємо алгоритми на двох текстах
 if __name__ == "__main__":
     # Заміни імена файлів на ті, що дали в завданні
@@ -187,18 +208,9 @@ if __name__ == "__main__":
     }
 
     results = []  # сюди складемо всі заміри
-
-    for text_name, text, p_exist, p_fake in [
-        ("article1", text1, existing_pattern_1, fake_pattern_1),
-        ("article2", text2, existing_pattern_2, fake_pattern_2),
-    ]:
-        for algo_name, algo_func in algorithms.items():
-            t_exist = measure_time(algo_func, text, p_exist, number=10)
-            t_fake = measure_time(algo_func, text, p_fake, number=10)
-
-            results.append((text_name, algo_name, "exists", t_exist))
-            results.append((text_name, algo_name, "fake", t_fake))
-
+    results += benchmark_for_text("article1", text1, existing_pattern_1, fake_pattern_1, algorithms)
+    results += benchmark_for_text("article2", text2, existing_pattern_2, fake_pattern_2, algorithms)
+    
     # вивід у консоль
     print(f"{'Text':10} | {'Algorithm':12} | {'Case':8} | Time (s)")
     print("-" * 50)
